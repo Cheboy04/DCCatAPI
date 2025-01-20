@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DCCatAPI.MainPage"
+             xmlns:vm="clr-namespace:DCCatAPI.ViewModels">
+
+    <ContentPage.BindingContext>
+        <vm:CatBreedsViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Content>
+        <StackLayout Padding="10" Spacing="10">
+            <!-- Cuadro de texto para buscar -->
+            <Entry Placeholder="Ingresa el nombre de la raza"
+                   Text="{Binding SearchText}" />
+
+            <!-- Botón para iniciar la búsqueda -->
+            <Button Text="Buscar"
+                    Command="{Binding SearchCommand}" />
+
+            <!-- Picker para seleccionar raza -->
+            <Picker Title="Selecciona una raza"
+                    ItemsSource="{Binding BreedNames}"
+                    SelectedItem="{Binding SelectedBreed}" />
+
+            <!-- Indicador de carga -->
+            <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
+
+            <!-- Lista de resultados -->
+            <CollectionView ItemsSource="{Binding Breeds}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Margin="10">
+                            <Label Text="{Binding Name}" FontSize="20" />
+                            <Label Text="{Binding Description}" FontSize="14" />
+                            <Label Text="{Binding Origin}" FontSize="14" />
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
