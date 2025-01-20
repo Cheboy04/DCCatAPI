@@ -27,14 +27,27 @@
             <ActivityIndicator IsRunning="{Binding IsLoading}" IsVisible="{Binding IsLoading}" />
 
             <!-- Lista de resultados -->
-            <CollectionView ItemsSource="{Binding Breeds}">
+            <CollectionView ItemsSource="{Binding Breeds}" SelectionMode="None">
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <StackLayout Margin="10">
-                            <Label Text="{Binding Name}" FontSize="20" />
-                            <Label Text="{Binding Description}" FontSize="14" />
-                            <Label Text="{Binding Origin}" FontSize="14" />
-                        </StackLayout>
+                        <Grid Padding="10">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="100"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <!-- Imagen de la raza -->
+                            <Image Source="{Binding Image.Url}" 
+                       Aspect="AspectFill" 
+                       HeightRequest="80" 
+                       WidthRequest="100" />
+
+                            <!-- Detalles de la raza -->
+                            <StackLayout Grid.Column="1" Padding="10,0,0,0">
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <Label Text="{Binding Description}" LineBreakMode="WordWrap" MaxLines="3" />
+                            </StackLayout>
+                        </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
